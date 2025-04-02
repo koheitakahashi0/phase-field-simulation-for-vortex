@@ -101,3 +101,20 @@ if st.button("Start simulation"):
 
     # プロットをStreamlitに表示
     st.pyplot(plt)
+
+        # --- 結果の可視化 (XY 平面) ---
+    z_slice = Nz // 2  # 中央のXY断面
+    Pz_xy = Pz[:, :, z_slice]
+
+    # XY平面の結果をプロット
+    plt.figure(figsize=(8, 6))
+    plt.imshow(Pz_xy.T, origin='lower', cmap='coolwarm', aspect='auto',
+               extent=[0, Nx * dx, 0, Ny * dy], vmin=-1, vmax=1)
+
+    plt.xlabel("X (nm)")
+    plt.ylabel("Y (nm)")
+    plt.colorbar(label="Polarization (arb. units)")
+    plt.title("Phase-Field Simulation (XY slice)")
+
+    # プロットをStreamlitに表示
+    st.pyplot(plt)
